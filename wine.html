@@ -9,16 +9,18 @@
       padding: 20px;
       max-width: 600px;
       margin: auto;
+      background-color: #f9f9f9;
     }
     h1 { margin-bottom: 0.5em; }
     p { margin: 0.3em 0; }
-    .wine-info { margin-top: 20px; }
-    .not-found { color: red; }
+    .wine-info { margin-top: 20px; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+    .not-found { color: red; font-weight: bold; }
+    .loading { font-style: italic; color: #555; }
   </style>
 </head>
 <body>
   <div id="wine-details">
-    <h1>Loading...</h1>
+    <h1 class="loading">Loading...</h1>
   </div>
 
   <script>
@@ -26,7 +28,10 @@
     const params = new URLSearchParams(window.location.search);
     const wineId = params.get('id');
 
-    fetch('wines.json')
+    // Replace this with your GitHub raw URL
+    const jsonUrl = 'https://raw.githubusercontent.com/tx3d3sign/wine-database/main/wines.json';
+
+    fetch(jsonUrl)
       .then(response => response.json())
       .then(wines => {
         const wine = wines.find(w => w.ID === wineId);
@@ -53,5 +58,3 @@
   </script>
 </body>
 </html>
-
-
