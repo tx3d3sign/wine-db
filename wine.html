@@ -2,42 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wine Details</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
-    h1 { margin-bottom: 0.5em; }
-    p { margin: 0.3em 0; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background-color: #fafafa;
+      color: #333;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 0.5em;
+      font-size: 1.8em;
+    }
+    p {
+      margin: 0.3em 0;
+      line-height: 1.4;
+    }
+    .label {
+      font-weight: bold;
+    }
+    .not-found {
+      margin-top: 50px;
+      font-size: 1.5em;
+      color: #900;
+    }
+    #qr-code {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
   <div id="wine-details">
     <h1>Loading...</h1>
   </div>
+  <canvas id="qr-code"></canvas>
 
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script>
-    // Get ID from URL
-    const params = new URLSearchParams(window.location.search);
-    const wineId = params.get('id');
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const wineId = params.get('id');
+      const container = document.getElementById('wine-details');
+      const qrCanvas = document.getElementById('qr-code');
 
-    fetch('wines.json')
-      .then(response => response.json())
-      .then(wines => {
+      try {
+        const response = await fetch('wines.json');
+        const wines = await response.json();
+
         const wine = wines.find(w => w.ID === wineId);
-        const container = document.getElementById('wine-details');
 
         if (wine) {
           container.innerHTML = `
             <h1>${wine.Name} (${wine.Vintage})</h1>
-            <p><b>Type:</b> ${wine.Type}</p>
-            <p><b>Region:</b> ${wine.Region}</p>
-            <p><b>Purchased at:</b> ${wine["Purchased at"]}</p>
-            <p><b>Notes:</b> ${wine.Notes}</p>
-          `;
-        } else {
-          container.innerHTML = '<h1>Wine not found</h1>';
-        }
-      });
-  </script>
-</body>
-</html>
-
+            <p><span class="label">Type:</span> ${wine.Type}</p>
+            <p><span class="label">Region:</span> ${wine.Region}</p>
+            <p><span class="label">Purchased at:</span> ${wine["Purchased at"]}</p>
+            <p><span class="la
