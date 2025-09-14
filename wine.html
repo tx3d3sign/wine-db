@@ -2,51 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wine Details</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-      background-color: #fafafa;
-      color: #333;
-      text-align: center;
-    }
-    h1 {
-      margin-bottom: 0.5em;
-      font-size: 1.8em;
-    }
-    p {
-      margin: 0.3em 0;
-      line-height: 1.4;
-    }
-    .label {
-      font-weight: bold;
-    }
-    .not-found {
-      margin-top: 50px;
-      font-size: 1.5em;
-      color: #900;
-    }
-    #qr-container {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px;
-      background: #fff;
-      border: 2px solid #333;
-      border-radius: 10px;
-    }
-    #qr-canvas {
-      display: block;
-      margin: auto;
-    }
-    #qr-text {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 1em;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    h1 { margin-bottom: 0.5em; }
+    p { margin: 0.3em 0; }
   </style>
 </head>
 <body>
@@ -54,53 +14,34 @@
     <h1>Loading...</h1>
   </div>
 
-  <div id="qr-container" style="display:none;">
-    <canvas id="qr-canvas"></canvas>
-    <div id="qr-text">Scan me</div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script>
-    (async () => {
-      const params = new URLSearchParams(window.location.search);
-      const wineId = params.get('id');
-      const container = document.getElementById('wine-details');
-      const qrContainer = document.getElementById('qr-container');
-      const qrCanvas = document.getElementById('qr-canvas');
+    // Get wine ID from URL query string
+    const params = new URLSearchParams(window.location.search);
+    const wineId = params.get('id');
 
-      try {
-        const response = await fetch('wines.json');
-        const wines = await response.json();
-
+    fetch('wines.json')
+      .then(response => response.json())
+      .then(wines => {
         const wine = wines.find(w => w.ID === wineId);
+        const container = document.getElementById('wine-details');
 
         if (wine) {
           container.innerHTML = `
             <h1>${wine.Name} (${wine.Vintage})</h1>
-            <p><span class="label">Type:</span> ${wine.Type}</p>
-            <p><span class="label">Region:</span> ${wine.Region}</p>
-            <p><span class="label">Purchased at:</span> ${wine["Purchased at"]}</p>
-            <p><span class="label">Notes:</span> ${wine.Notes}</p>
+            <p><b>Type:</b> ${wine.Type}</p>
+            <p><b>Region:</b> ${wine.Region}</p>
+            <p><b>Purchased at:</b> ${wine["Purchased at"]}</p>
+            <p><b>Notes:</b> ${wine.Notes}</p>
           `;
-
-          // Show QR code container
-          qrContainer.style.display = "inline-block";
-
-          // Generate QR code linking to this wine page
-          const url = `${window.location.origin}${window.location.pathname}?id=${wine.ID}`;
-          QRCode.toCanvas(qrCanvas, url, { width: 200, margin: 2 }, function (error) {
-            if (error) console.error(error);
-          });
         } else {
-          container.innerHTML = '<div class="not-found">Wine not found</div>';
-          qrContainer.style.display = "none";
+          container.innerHTML = '<h1>Wine not found</h1>';
         }
-      } catch (err) {
-        container.innerHTML = '<div class="not-found">Error loading wine data</div>';
-        qrContainer.style.display = "none";
+      })
+      .catch(err => {
+        document.getElementById('wine-details').innerHTML = '<h1>Error loading data</h1>';
         console.error(err);
-      }
-    })();
+      });
   </script>
 </body>
 </html>
+
