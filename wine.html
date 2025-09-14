@@ -4,58 +4,40 @@
   <meta charset="UTF-8">
   <title>Wine Details</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      background-color: #faf7f5;
-      color: #333;
-    }
-    .card {
-      max-width: 500px;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .meta { color: #666; margin-bottom: 1rem; }
-    .notes { font-style: italic; }
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    h1 { margin-bottom: 0.5em; }
+    p { margin: 0.3em 0; }
   </style>
 </head>
 <body>
-  <div class="card" id="wine-card">
-    <h1>Loading wine...</h1>
+  <div id="wine-details">
+    <h1>Loading...</h1>
   </div>
 
   <script>
-    // Get wine ID from URL: ?id=123
+    // Get ID from URL
     const params = new URLSearchParams(window.location.search);
-    const wineId = params.get("id");
+    const wineId = params.get('id');
 
-    // Fetch the wines.json file (must be in the same repo)
-    fetch("wines.json")
+    fetch('wines.json')
       .then(response => response.json())
-      .then(data => {
-        const wine = data.find(w => w.ID === wineId);
+      .then(wines => {
+        const wine = wines.find(w => w.ID === wineId);
+        const container = document.getElementById('wine-details');
 
-        const card = document.getElementById("wine-card");
-
-        if (!wine) {
-          card.innerHTML = "<h1>Wine not found</h1>";
-          return;
+        if (wine) {
+          container.innerHTML = `
+            <h1>${wine.Name} (${wine.Vintage})</h1>
+            <p><b>Type:</b> ${wine.Type}</p>
+            <p><b>Region:</b> ${wine.Region}</p>
+            <p><b>Purchased at:</b> ${wine["Purchased at"]}</p>
+            <p><b>Notes:</b> ${wine.Notes}</p>
+          `;
+        } else {
+          container.innerHTML = '<h1>Wine not found</h1>';
         }
-
-        card.innerHTML = `
-          <h1>${wine.Name} (${wine.Vintage})</h1>
-          <div class="meta">${wine.Region}</div>
-          <div class="notes">${wine.Notes || ""}</div>
-          <p><strong>Purchased at:</strong> ${wine["Purchased at"] || "N/A"}</p>
-        `;
-      })
-      .catch(err => {
-        document.getElementById("wine-card").innerHTML = "<h1>Error loading wines.json</h1>";
-        console.error(err);
       });
   </script>
 </body>
 </html>
+
