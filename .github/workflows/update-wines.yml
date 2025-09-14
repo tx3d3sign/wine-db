@@ -36,4 +36,5 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+Add workflow to update wines.json automatically
 
