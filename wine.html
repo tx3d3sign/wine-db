@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wine Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #faf7f5;
+      color: #333;
+    }
+    .card {
+      max-width: 500px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .meta { color: #666; margin-bottom: 1rem; }
+    .notes { font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="card" id="wine-card">
+    <h1>Loading wine...</h1>
+  </div>
+
+  <script>
+    // Get wine ID from URL: ?id=123
+    const params = new URLSearchParams(window.location.search);
+    const wineId = params.get("id");
+
+    // Fetch the wines.json file (must be in the same repo)
+    fetch("wines.json")
+      .then(response => response.json())
+      .then(data => {
+        const wine = data.find(w => w.ID === wineId);
+
+        const card = document.getElementById("wine-card");
+
+        if (!wine) {
+          card.innerHTML = "<h1>Wine not found</h1>";
+          return;
+        }
+
+        card.innerHTML = `
+          <h1>${wine.Name} (${wine.Vintage})</h1>
+          <div class="meta">${wine.Type} - ${wine.Region}</div>
+          <div class="notes">${wine.Notes || ""}</div>
+          <p><strong>Purchased at:</strong> ${wine["Purchased at"] || "N/A"}</p>
+        `;
+      })
+      .catch(err => {
+        document.getElementById("wine-card").innerHTML = "<h1>Error loading wines.json</h1>";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
