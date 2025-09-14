@@ -47,7 +47,7 @@
 
         card.innerHTML = `
           <h1>${wine.Name} (${wine.Vintage})</h1>
-          <div class="meta">${wine.Type} - ${wine.Region}</div>
+          <div class="meta">${wine.Region}</div>
           <div class="notes">${wine.Notes || ""}</div>
           <p><strong>Purchased at:</strong> ${wine["Purchased at"] || "N/A"}</p>
         `;
