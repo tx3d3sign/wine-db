@@ -11,12 +11,12 @@
     "Purchased at": "abc",
     "Inventory (Bottles Left)": "3",
     "Rating (1–5)": "4.5",
-    "Notes": "Rich, dark fruit, cocoa, smooth tannins",
+    "Notes": "",
+    "Aroma Notes": "Rich, dark fruit, cocoa, smooth tannins",
     "Drink By (Year)": "2026",
     "Occasion / Pairing": "Steak, grilled meats",
     "Date Added": "2025-09-13",
-    "Link": "",
-    "QR Code (formula)": "#NAME?"
+    "Link": ""
   },
   {
     "ID": "W002",
@@ -30,12 +30,12 @@
     "Purchased at": "abc",
     "Inventory (Bottles Left)": "1",
     "Rating (1–5)": "5",
-    "Notes": "Legendary, needs decanting, long finish",
+    "Notes": "",
+    "Aroma Notes": "Legendary, needs decanting, long finish",
     "Drink By (Year)": "2040",
     "Occasion / Pairing": "Special occasions",
     "Date Added": "2025-09-13",
-    "Link": "",
-    "QR Code (formula)": "#NAME?"
+    "Link": ""
   },
   {
     "ID": "W003",
@@ -49,12 +49,12 @@
     "Purchased at": "abc",
     "Inventory (Bottles Left)": "6",
     "Rating (1–5)": "4.2",
-    "Notes": "Crisp, citrus, passionfruit, refreshing",
+    "Notes": "",
+    "Aroma Notes": "Crisp, citrus, passionfruit, refreshing",
     "Drink By (Year)": "2025",
     "Occasion / Pairing": "Seafood, summer evenings",
     "Date Added": "2025-09-13",
-    "Link": "",
-    "QR Code (formula)": "#NAME?"
+    "Link": ""
   },
   {
     "ID": "W004",
@@ -69,11 +69,11 @@
     "Inventory (Bottles Left)": "",
     "Rating (1–5)": "",
     "Notes": "",
+    "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
     "Date Added": "",
-    "Link": "",
-    "QR Code (formula)": ""
+    "Link": ""
   },
   {
     "ID": "W005",
@@ -88,11 +88,11 @@
     "Inventory (Bottles Left)": "",
     "Rating (1–5)": "",
     "Notes": "",
+    "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
     "Date Added": "",
-    "Link": "",
-    "QR Code (formula)": ""
+    "Link": ""
   },
   {
     "ID": "W006",
@@ -107,11 +107,11 @@
     "Inventory (Bottles Left)": "",
     "Rating (1–5)": "",
     "Notes": "",
+    "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
     "Date Added": "",
-    "Link": "",
-    "QR Code (formula)": ""
+    "Link": ""
   },
   {
     "ID": "W007",
@@ -126,11 +126,11 @@
     "Inventory (Bottles Left)": "",
     "Rating (1–5)": "",
     "Notes": "",
+    "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
     "Date Added": "",
-    "Link": "",
-    "QR Code (formula)": ""
+    "Link": ""
   },
   {
     "ID": "W008",
@@ -145,11 +145,11 @@
     "Inventory (Bottles Left)": "",
     "Rating (1–5)": "",
     "Notes": "",
+    "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
     "Date Added": "",
-    "Link": "",
-    "QR Code (formula)": ""
+    "Link": ""
   },
   {
     "ID": "W009",
@@ -164,10 +164,10 @@
     "Inventory (Bottles Left)": "1",
     "Rating (1–5)": "",
     "Notes": "",
+    "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
     "Date Added": "",
-    "Link": "",
-    "QR Code (formula)": ""
+    "Link": ""
   }
 ]
