@@ -30,8 +30,22 @@
       font-size: 1.5em;
       color: #900;
     }
-    #qr-code {
+    #qr-container {
+      display: inline-block;
       margin-top: 20px;
+      padding: 10px;
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
+    #qr-canvas {
+      display: block;
+      margin: auto;
+    }
+    #qr-text {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1em;
     }
   </style>
 </head>
@@ -39,7 +53,11 @@
   <div id="wine-details">
     <h1>Loading...</h1>
   </div>
-  <canvas id="qr-code"></canvas>
+
+  <div id="qr-container" style="display:none;">
+    <canvas id="qr-canvas"></canvas>
+    <div id="qr-text">Scan me</div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script>
@@ -47,7 +65,8 @@
       const params = new URLSearchParams(window.location.search);
       const wineId = params.get('id');
       const container = document.getElementById('wine-details');
-      const qrCanvas = document.getElementById('qr-code');
+      const qrContainer = document.getElementById('qr-container');
+      const qrCanvas = document.getElementById('qr-canvas');
 
       try {
         const response = await fetch('wines.json');
@@ -61,4 +80,27 @@
             <p><span class="label">Type:</span> ${wine.Type}</p>
             <p><span class="label">Region:</span> ${wine.Region}</p>
             <p><span class="label">Purchased at:</span> ${wine["Purchased at"]}</p>
-            <p><span class="la
+            <p><span class="label">Notes:</span> ${wine.Notes}</p>
+          `;
+
+          // Show QR code container
+          qrContainer.style.display = "inline-block";
+
+          // Generate QR code linking to this wine page
+          const url = `${window.location.origin}${window.location.pathname}?id=${wine.ID}`;
+          QRCode.toCanvas(qrCanvas, url, { width: 200, margin: 2 }, function (error) {
+            if (error) console.error(error);
+          });
+        } else {
+          container.innerHTML = '<div class="not-found">Wine not found</div>';
+          qrContainer.style.display = "none";
+        }
+      } catch (err) {
+        container.innerHTML = '<div class="not-found">Error loading wine data</div>';
+        qrContainer.style.display = "none";
+        console.error(err);
+      }
+    })();
+  </script>
+</body>
+</html>
