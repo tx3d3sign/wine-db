@@ -72,7 +72,7 @@
     "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
-    "Date Added": "",
+    "Date Added": "2025-09-15",
     "Link": ""
   },
   {
@@ -91,7 +91,26 @@
     "Aroma Notes": "",
     "Drink By (Year)": "",
     "Occasion / Pairing": "",
-    "Date Added": "",
+    "Date Added": "2025-09-15",
+    "Link": ""
+  },
+  {
+    "ID": "W006",
+    "Name": "Casanova di Neri -Irrosso",
+    "Vintage": "2022",
+    "Region": "Montalcino",
+    "Country": "Italy",
+    "Grape(s)": "Brunello",
+    "Style": "Red",
+    "Price": "$26.00",
+    "Purchased at": "Milam's",
+    "Inventory (Bottles Left)": "1",
+    "Rating (1–5)": "",
+    "Notes": "",
+    "Aroma Notes": "",
+    "Drink By (Year)": "",
+    "Occasion / Pairing": "",
+    "Date Added": "2025-09-16",
     "Link": ""
   }
 ]
